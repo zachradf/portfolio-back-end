@@ -5,6 +5,8 @@ import cors from 'cors'
 import connectDB from './db.js'
 import dotenv from 'dotenv'
 
+import userRouter from './routes/user.routes.js'
+
 dotenv.config();
 connectDB()
 // Create Express app
@@ -21,10 +23,8 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-app.get('/login', (req, res) => {
-  // Login logic will go here
-  res.send('Login route');
-});
+app.use('/api/users', userRouter);
+
 
 // Start the server
 const PORT = process.env.PORT || 5000;
