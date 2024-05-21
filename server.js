@@ -1,8 +1,12 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const cors = require('cors');
+import express from 'express';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import cors from 'cors'
+import connectDB from './db.js'
+import dotenv from 'dotenv'
 
+dotenv.config();
+connectDB()
 // Create Express app
 const app = express();
 
@@ -12,8 +16,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(cors());
 
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
 // Routes
-app.post('/login', (req, res) => {
+app.get('/login', (req, res) => {
   // Login logic will go here
   res.send('Login route');
 });
