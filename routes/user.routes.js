@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     const users = await User.find();
     res.json(users);
   } catch (err) {
-    res.status(500).send('Server Error');
+    res.status(500).send('Server Error', err);
   }
 });
 
@@ -33,7 +33,8 @@ router.post('/', async (req, res) => {
     await user.save();
     res.json(user);
   } catch (err) {
-    res.status(500).send('Server Error', err.message);
+    console.error(err.message);
+    res.status(500).send('Server Error');
   }
 });
 

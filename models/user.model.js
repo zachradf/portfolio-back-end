@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
+  email: { type: String },
   name: { type: String },
   walletAddress: { type: String }, // To store the blockchain wallet address
   nftProfilePicture: { type: String }, // URL to the NFT profile picture

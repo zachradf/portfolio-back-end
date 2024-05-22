@@ -6,6 +6,7 @@ import connectDB from './db.js'
 import dotenv from 'dotenv'
 
 import userRouter from './routes/user.routes.js'
+import authRouter from './routes/auth.routes.js'
 
 dotenv.config();
 connectDB()
@@ -15,7 +16,7 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use(cors());
 
 app.get('/', (req, res) => {
@@ -24,7 +25,7 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/api/users', userRouter);
-
+app.use('/api/login', authRouter);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
