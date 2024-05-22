@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
       email,
       name,
       walletAddress,
-      nftProfilePicture
+      nftProfilePicture,
     });
 
     await user.save();

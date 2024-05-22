@@ -1,6 +1,5 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import morgan from 'morgan';
 import cors from 'cors'
 import connectDB from './db.js'
 import dotenv from 'dotenv'
@@ -16,7 +15,6 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(morgan('dev'));
 app.use(cors());
 
 app.get('/', (req, res) => {
