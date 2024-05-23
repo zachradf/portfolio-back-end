@@ -8,6 +8,7 @@ const userSchema = new Schema({
   email: { type: String },
   name: { type: String },
   walletAddress: { type: String }, // To store the blockchain wallet address
+  privateKey: { type: String }, // To store the blockchain wallet private key
   nftProfilePicture: { type: String }, // URL to the NFT profile picture
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
