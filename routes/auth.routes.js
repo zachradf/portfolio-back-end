@@ -8,7 +8,7 @@ dotenv.config();
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  // console.log(req.body);
+  console.log('req.body', req.body);
   const { username, password } = req.body;
 
   try {
@@ -28,6 +28,11 @@ router.post('/', async (req, res) => {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: '1h',
     });
+
+    // Set user details in session
+    req.session.user = user; // Customize based on the info you need
+    req.session.isAuthenticated = true; // Explicitly mark the session as authenticated
+
 
     res.json({ token, user });
   } catch (err) {
