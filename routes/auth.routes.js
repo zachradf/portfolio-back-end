@@ -8,7 +8,6 @@ dotenv.config();
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  console.log('req.body', req.body);
   const { username, password } = req.body;
 
   try {

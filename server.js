@@ -29,8 +29,6 @@ app.use(session({
 
 // Routes
 app.get('/api/auth/check-session', (req, res) => {
-  // console.log('req.session in check-session', req.session.user, req.session.user._id);
-  // const {_id, username, email, name, walletAddress, nftProfilePicture} = req.session.user;
   if (req.session.user) {
     console.log('req.session.user in check-session', req.session.user);
     res.send({
