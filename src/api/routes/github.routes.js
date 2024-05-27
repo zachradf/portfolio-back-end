@@ -221,8 +221,9 @@ router.get('/repo-details/:owner/:repo', async (req, res) => {
   });
 
 
-router.post('/push/:user/:repo', async (req, res) => {
-  const { owner, repo, path, message, content, branch } = req.body;
+router.post('/push/:owner/:repo', async (req, res) => {
+  const { path, message, content, branch } = req.body;
+  const { owner, repo } = req.params;
 
   if (!req.session || !req.session.authToken) {
     return res.status(401).json({ error: 'No authentication token found in session' });
@@ -255,6 +256,14 @@ router.post('/push/:user/:repo', async (req, res) => {
   } catch (error) {
     if (error.status === 404) {
       try {
+        console.log('status was 404, creating repository')
+        console.log('status was 404, creating repository',  owner,
+        repo,
+        path,
+        message,
+        Buffer.from(content).toString('base64'),
+        branch)
+
         // Create the file if it does not exist
         const { data: createResponse } = await octokit.repos.createOrUpdateFileContents({
           owner,
@@ -277,6 +286,7 @@ router.post('/push/:user/:repo', async (req, res) => {
     }
   }
 });
+
 
   
   export default router;
