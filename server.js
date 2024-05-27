@@ -34,6 +34,7 @@ app.get('/api/auth/check-session', (req, res) => {
     res.send({
       isAuthenticated: true,
       user: req.session.user // Add more fields as necessary
+      
     });
   } else {
     res.json({ isAuthenticated: false, user: null });

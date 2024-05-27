@@ -11,6 +11,7 @@
   "author": "Your Name",
   "license": "MIT",
   "dependencies": {
+    "@octokit/rest": "^20.1.1",
     "@openzeppelin/contracts": "^5.0.2",
     "bcrypt": "^5.1.1",
     "bignumber": "^1.1.0",
@@ -20,7 +21,7 @@
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",
     "ethers": "^6.12.1",
-    "express": "^4.17.1",
+    "express": "^4.19.2",
     "express-session": "^1.18.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
