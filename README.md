@@ -1,1 +1,26 @@
-IyBwb3J0Zm9saW8tYmFjay1lbmQKUG9ydGZvbGlvIEJhY2sgRW5kCgojIFRFU1RJTkcgVEhFIEJBQ0sgRU5ECiMgVGVzdGluZyB0aGUgYmFjayBlbmQgb2YgbXkgcG9ydGZvbGlvIHByb2plY3QuCgojIyBQcm9qZWN0IE92ZXJ2aWV3CgpUaGUgR2l0SHViIFJlcG9zaXRvcnkgVmlld2VyIGFuZCBFZGl0b3IgaXMgYSB3ZWIgYXBwbGljYXRpb24gdGhhdCBhbGxvd3MgdXNlcnMgdG8gaW50ZXJhY3Qgd2l0aCB0aGVpciBHaXRIdWIgcmVwb3NpdG9yaWVzIGluIGEgc2VhbWxlc3MgYW5kIGludHVpdGl2ZSBtYW5uZXIuIFRoaXMgcHJvamVjdCBpcyBidWlsdCB1c2luZyBtb2Rlcm4gd2ViIHRlY2hub2xvZ2llcyBhbmQgaW50ZWdyYXRlcyB3aXRoIHRoZSBHaXRIdWIgQVBJIHRvIHByb3ZpZGUgY29tcHJlaGVuc2l2ZSBmdW5jdGlvbmFsaXR5IGZvciBtYW5hZ2luZyByZXBvc2l0b3JpZXMuCgojIyBLZXkgRmVhdHVyZXMKCi0gKipSZXBvc2l0b3J5IFZpZXdlcioqOiBWaWV3IGRldGFpbHMgb2YgeW91ciBHaXRIdWIgcmVwb3NpdG9yaWVzLCBpbmNsdWRpbmcgdGhlIGRlc2NyaXB0aW9uLCBzdGFycywgZm9ya3MsIGFuZCBvcGVuIGlzc3Vlcy4KLSAqKk1hcmtkb3duIEVkaXRvcioqOiBFZGl0IG1hcmtkb3duIGZpbGVzIHdpdGhpbiB5b3VyIHJlcG9zaXRvcmllcyBkaXJlY3RseSBmcm9tIHRoZSB3ZWIgaW50ZXJmYWNlLgotICoqU3Rhci9VbnN0YXIgUmVwb3NpdG9yaWVzKio6IFN0YXIgYW5kIHVuc3RhciByZXBvc2l0b3JpZXMgd2l0aCBhIHNpbmdsZSBjbGljay4gVGhlIHN0YXIgaWNvbiB1cGRhdGVzIGluIHJlYWwtdGltZSB0byByZWZsZWN0IHRoZSBjdXJyZW50IHN0YXR1cy4KLSAqKkZvcmsgUmVwb3NpdG9yaWVzKio6IEZvcmsgcmVwb3NpdG9yaWVzIGRpcmVjdGx5IGZyb20gdGhlIHdlYiBhcHBsaWNhdGlvbi4KLSAqKlN1Ym1pdCBJc3N1ZXMqKjogU3VibWl0IG5ldyBpc3N1ZXMgdG8gcmVwb3NpdG9yaWVzLiBVc2VycyBjYW4gcHJvdmlkZSBhIHRpdGxlIGFuZCBkZXNjcmlwdGlvbiBmb3IgdGhlIGlzc3VlLgotICoqUmVwb3NpdG9yeSBOYXZpZ2F0aW9uKio6IE5hdmlnYXRlIHRocm91Z2ggdGhlIHJlcG9zaXRvcnkgZmlsZXMgYW5kIGRpcmVjdG9yaWVzIGFzIHlvdSB3b3VsZCBvbiBHaXRIdWIuCgojIyBUZWNobm9sb2dpZXMgVXNlZAoKLSAqKlJlYWN0Kio6IEEgSmF2YVNjcmlwdCBsaWJyYXJ5IGZvciBidWlsZGluZyB1c2VyIGludGVyZmFjZXMuCi0gKipNYXRlcmlhbC1VSSoqOiBBIHBvcHVsYXIgUmVhY3QgVUkgZnJhbWV3b3JrIGZvciBjcmVhdGluZyBiZWF1dGlmdWwsIHJlc3BvbnNpdmUgZGVzaWducy4KLSAqKk9jdG9raXQqKjogQSBHaXRIdWIgQVBJIGNsaWVudCBmb3IgSmF2YVNjcmlwdCwgdXNlZCBmb3IgbWFraW5nIHJlcXVlc3RzIHRvIHRoZSBHaXRIdWIgQVBJLgotICoqQXhpb3MqKjogQSBwcm9taXNlLWJhc2VkIEhUVFAgY2xpZW50IGZvciBtYWtpbmcgQVBJIHJlcXVlc3RzLgotICoqRXhwcmVzcyoqOiBBIG1pbmltYWwgYW5kIGZsZXhpYmxlIE5vZGUuanMgd2ViIGFwcGxpY2F0aW9uIGZyYW1ld29yaywgdXNlZCBmb3IgYnVpbGRpbmcgdGhlIGJhY2tlbmQgQVBJLgo=
+# portfolio-back-end
+Portfolio Back End
+
+# TESTING THE BACK END
+# Testing the back end of my portfolio project.
+
+## Project Overview
+
+The GitHub Repository Viewer and Editor is a web application that allows users to interact with their GitHub repositories in a seamless and intuitive manner. This project is built using modern web technologies and integrates with the GitHub API to provide comprehensive functionality for managing repositories.
+
+## Key Features
+
+- **Repository Viewer**: View details of your GitHub repositories, including the description, stars, forks, and open issues.
+- **Markdown Editor**: Edit markdown files within your repositories directly from the web interface.
+- **Star/Unstar Repositories**: Star and unstar repositories with a single click. The star icon updates in real-time to reflect the current status.
+- **Fork Repositories**: Fork repositories directly from the web application.
+- **Submit Issues**: Submit new issues to repositories. Users can provide a title and description for the issue.
+- **Repository Navigation**: Navigate through the repository files and directories as you would on GitHub.
+
+## Technologies Used
+
+- **React**: A JavaScript library for building user interfaces.
+- **Material-UI**: A popular React UI framework for creating beautiful, responsive designs.
+- **Octokit**: A GitHub API client for JavaScript, used for making requests to the GitHub API.
+- **Axios**: A promise-based HTTP client for making API requests.
+- **Express**: A minimal and flexible Node.js web application framework, used for building the backend API.
