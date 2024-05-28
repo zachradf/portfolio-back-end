@@ -12,14 +12,12 @@ import sessionRouter from './src/api/routes/session.routes.js'
 
 dotenv.config();
 connectDB()
-// Create Express app
 const app = express();
 
-// Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-//session middleware
+
 app.use(session({
   secret: 'your_secret_key',  // Choose a strong secret for session encryption
   resave: false,
@@ -27,15 +25,11 @@ app.use(session({
   cookie: { secure: false }  // Set true in production with HTTPS
 }));
 
-// Route to clear the session
-
-
-
 app.use('/api/users', userRouter);
 app.use('/api/wallet', walletRouter);
 app.use('/api/auth/github', githubRouter);
 app.use('/api/check-session', sessionRouter)
-// Start the server
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

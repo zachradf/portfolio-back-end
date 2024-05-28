@@ -2,8 +2,8 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import CryptoJS from 'crypto-js';
-import createUser from '../services/createUser.js';
-import loginUser from '../services/loginUser.js';
+import createUser from '../services/user/createUser.js';
+import loginUser from '../services/user/loginUser.js';
 import setSession from '../services/setSession.js';
 import { generateWallet } from '../services/walletUtils.js';
 const router = express.Router();

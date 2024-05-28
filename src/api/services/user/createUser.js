@@ -1,4 +1,4 @@
-import User from '../../models/user.model.js'
+import User from '../../../models/user.model.js'
 
 export default async function createUser(username, hashedPassword, email, name, address, encryptedPrivateKey, nftProfilePicture){
     let user = new User({
