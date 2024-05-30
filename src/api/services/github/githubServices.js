@@ -3,7 +3,6 @@ import { Octokit } from "@octokit/rest";
 import dotenv from "dotenv";
 
 dotenv.config();
-
 export const initiateOAuth = () => {
   const clientId = process.env.GITHUB_OAUTH_CLIENT_ID;
   const redirectUri = encodeURIComponent(process.env.GITHUB_REDIRECT_URI);
@@ -62,69 +61,68 @@ export const checkStarred = async (
   }
 };
 
-export const updateRepo = async (req, res) => {
+
+export const upsertRepo = async (req, res) => {
     const { path, message, content, branch } = req.body;
     const { owner, repo } = req.params;
-  
+
     if (!req.session || !req.session.authToken) {
-      return res.status(401).json({ error: 'No authentication token found in session' });
+        return res.status(401).json({ error: 'No authentication token found in session' });
     }
-  
+
     const octokit = new Octokit({ auth: req.session.authToken });
-  
+
     try {
-      // Get the current file content to get the SHA
-      const { data: existingFile } = await octokit.repos.getContent({
-        owner,
-        repo,
-        path,
-        ref: branch,
-      });
-  
-      // Update the file
-      const { data: updateResponse } = await octokit.repos.createOrUpdateFileContents({
-        owner,
-        repo,
-        path,
-        message,
-        content: Buffer.from(content).toString('base64'),
-        sha: existingFile.sha,
-        branch,
-      });
-  
-      console.log(`File updated successfully: ${updateResponse.commit.sha}`);
-      return res.json({ success: true, commitSha: updateResponse.commit.sha });
+        // Get the current file content to get the SHA
+        const { data: existingFile } = await octokit.repos.getContent({
+            owner,
+            repo,
+            path,
+            ref: branch,
+        });
+
+        // Update the file
+        const { data: updateResponse } = await octokit.repos.createOrUpdateFileContents({
+            owner,
+            repo,
+            path,
+            message,
+            content: Buffer.from(content).toString('base64'),
+            sha: existingFile.sha,
+            branch,
+        });
+
+        console.log(`File updated successfully: ${updateResponse.commit.sha}`);
+        return res.json({ success: true, commitSha: updateResponse.commit.sha });
     } catch (error) {
-      if (error.status === 404) {
-        try {
-          console.log('status was 404, creating repository')
-          console.log('status was 404, creating repository',  owner,
-          repo,
-          path,
-          message,
-          Buffer.from(content).toString('base64'),
-          branch)
-  
-          // Create the file if it does not exist
-          const { data: createResponse } = await octokit.repos.createOrUpdateFileContents({
+        if (error.status === 404) {
+            return await handleFileNotFound(octokit, owner, repo, path, message, content, branch, res);
+        } else {
+            console.error(`Failed to update file: ${error.message}`);
+            return res.status(500).json({ error: 'Failed to update file', details: error.message });
+        }
+    }
+};
+
+const handleFileNotFound = async (octokit, owner, repo, path, message, content, branch, res) => {
+    try {
+        console.log('File not found, creating new file ','owner ', owner, 'repo', repo, 'path', path, 'message ', message, 'content ', content, 'branch ', branch );
+
+        // Create the file if it does not exist
+        const { data: createResponse } = await octokit.repos.createOrUpdateFileContents({
             owner,
             repo,
             path,
             message,
             content: Buffer.from(content).toString('base64'),
             branch,
-          });
-  
-          console.log(`File created successfully: ${createResponse.commit.sha}`);
-          return res.json({ success: true, commitSha: createResponse.commit.sha });
-        } catch (createError) {
-          console.error(`Failed to create file: ${createError}`);
-          return res.status(500).json({ error: 'Failed to create file', details: createError.message });
-        }
-      } else {
-        console.error(`Failed to update file: ${error}`);
-        return res.status(500).json({ error: 'Failed to update file', details: error.message });
-      }   
+        });
+
+        console.log(`File created successfully: ${createResponse.commit.sha}`);
+        return res.json({ success: true, commitSha: createResponse.commit.sha });
+    } catch (createError) {
+        console.error(`Failed to create file: ${createError.message}`);
+        return res.status(500).json({ error: 'Failed to create file', details: createError.message });
     }
 };
 
@@ -187,16 +185,16 @@ export const forkRepo = async (owner, repo, authToken) => {
 
   return response
 }
-export const pushCode = async (owner, repo, authToken, content, message, path, branch) => {
+export const upsertFile = async (owner, repo, authToken, content, message, path, branch) => {
   const octokit = new Octokit({ auth: authToken });
 
-  // try {
-    // Get the current file content to get the SHA
+  try {
+    // Try to get the current file content to get the SHA
     const { data: existingFile } = await octokit.repos.getContent({
       owner,
       repo,
       path,
-      ref:branch,
+      ref: branch,
     });
 
     // Update the file
@@ -209,4 +207,90 @@ export const pushCode = async (owner, repo, authToken, content, message, path, b
       sha: existingFile.sha,
       branch,
     });
+  } catch (error) {
+    if (error.status === 404) {
+      // File does not exist, create it
+      return await octokit.repos.createOrUpdateFileContents({
+        owner,
+        repo,
+        path,
+        message,
+        content: Buffer.from(content).toString('base64'),
+        branch,
+      });
+    } else {
+      console.error('Error updating file:', error);
+      throw new Error('Failed to updating file');
+    }
   }
+};
+  export const listForks = async (owner, repo, authToken) => {
+    const octokit = new Octokit({ auth: authToken });
+    try {
+      const { data } = await octokit.repos.listForks({
+        owner,
+        repo,
+        per_page: 100,
+        page: 1,
+      });
+      return data;
+    } catch (error) {
+      console.error('Error fetching forks:', error);
+      throw new Error('Failed to list forks');
+    }
+  };
+
+  export const listIssues = async (owner, repo, authToken) => {
+    const octokit = new Octokit({ auth: authToken });
+    const { data } = await octokit.issues.listForRepo({
+      owner,
+      repo,
+      state: "all",
+      per_page: 100,
+      page: 1,
+    });
+    return data;
+  };
+  
+
+////NEW SERVICE FUNCTIONS
+export const createRepo = async (name, description, privateRepo, authToken) => {
+  const octokit = new Octokit({ auth: authToken });
+  const { data } = await octokit.repos.createForAuthenticatedUser({
+    name,
+    description,
+    private: privateRepo,
+  });
+  return data;
+};
+
+export const checkRepoOwnership = async (owner, repo, authToken) => {
+  const octokit = new Octokit({ auth: authToken });
+
+  try {
+    const { data } = await octokit.repos.get({
+      owner,
+      repo,
+    });
+
+    return { isOwner: true, repo: data };
+  } catch (error) {
+    if (error.status === 404) {
+      return { isOwner: false };
+    }
+    throw new Error("Failed to check repository ownership");
+  }
+};
+
+export const createPullRequest = async (owner, repo, title, head, base, body, authToken) => {
+  const octokit = new Octokit({ auth: authToken });
+  const { data } = await octokit.pulls.create({
+    owner,
+    repo,
+    title,
+    head,
+    base,
+    body,
+  });
+  return data;
+};
