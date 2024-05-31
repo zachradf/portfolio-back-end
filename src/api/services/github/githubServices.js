@@ -234,14 +234,14 @@ export const createPullRequest = async (
   return data;
 };
 
-export const fetchFileContent = async (owner, repo, authToken) => {
+export const getFileContent = async (owner, repo, path, branch, authToken) => {
   const octokit = new Octokit({ auth: authToken });
 
   const { data } = await octokit.repos.getContent({
     owner,
     repo,
     path,
-    ref: branch,
+    ref: branch
   });
 
   return data;

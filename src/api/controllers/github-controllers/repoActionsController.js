@@ -16,7 +16,8 @@ repoActionsController.upsertFile = async (req, res) => {
       branch,
       authToken
     );
-    console.log(`File updated successfully: ${data}`);
+    console.log(`File updated successfully: ${data.content}`);
+    return res.status(200).json({ message: 'File updated successfully', content: data.content });  
   } catch (error) {
     console.error(`Failed to update file: ${error}`);
     return res

@@ -52,7 +52,7 @@ router.get(
   checkOwnerAndRepo,
   getRepoInfoController.checkRepoOwnership
 );
-router.get('/file-content');
+router.get('/file-content/:owner/:repo', checkAuthToken, checkOwnerAndRepo, getRepoInfoController.getFileContent);
 
 // Repo Actions
 router.put(

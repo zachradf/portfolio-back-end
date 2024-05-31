@@ -3,7 +3,7 @@ import * as githubService from '../../services/github/githubServices.js';
 const getRepoInfoController = {};
 
 getRepoInfoController.listRepositories = async (req, res) => {
-  const { authToken } = req.session.authToken;
+  const { authToken } = req.session;
 
   try {
     const data = await githubService.listRepositories(authToken);
@@ -85,19 +85,25 @@ getRepoInfoController.listIssues = async (req, res) => {
   }
 };
 
-getRepoInfoController.fetchFileContent = async (req, res) => {
+getRepoInfoController.getFileContent = async (req, res) => {
   const { owner, repo } = req.params;
-  const { path, branch } = req.body;
+  const { path, branch } = req.query;
   const { authToken } = req.session;
+  console.log('all getFileContent args', owner, repo, path, branch, authToken);
 
   try {
-    const data = githubService.fetchFileContent(owner, repo, authToken);
-    return Buffer.from(data.content, 'base64').toString('utf-8');
+    const data = await githubService.getFileContent(owner, repo, path, branch, authToken);
+    console.log('data in getFileContent', data)
+    const fileContent = Buffer.from(data.content, 'base64').toString('utf-8');
+    console.log('fileContent in getFileContent', fileContent)
+
+    res.json({ content: fileContent });
   } catch (error) {
     console.error('Error fetching file content:', error);
-    return '';
+    res.status(500).json({ error: 'Error fetching file content' });
   }
 };
+
 
 //TODO UNCHECKED FUNCTION
 getRepoInfoController.checkRepoOwnership = async (req, res) => {
