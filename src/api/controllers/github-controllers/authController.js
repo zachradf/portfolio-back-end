@@ -11,7 +11,10 @@ githubAuthController.exchangeCode = async (req, res) => {
   const { code, user } = req.body;
 
   try {
-    const { access_token } = await githubService.exchangeCodeForToken(code, user);
+    const { access_token } = await githubService.exchangeCodeForToken(
+      code,
+      user
+    );
     req.session.authToken = access_token;
 
     if (!req.session.user) req.session.user = user;

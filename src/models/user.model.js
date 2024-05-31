@@ -1,5 +1,5 @@
 // models/user.model.js
-import mongoose from'mongoose';
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -11,7 +11,7 @@ const userSchema = new Schema({
   privateKey: { type: String }, // To store the blockchain wallet private key
   nftProfilePicture: { type: String }, // URL to the NFT profile picture
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now }
+  updatedAt: { type: Date, default: Date.now },
 });
 
 // Middleware to update the updatedAt field before save
